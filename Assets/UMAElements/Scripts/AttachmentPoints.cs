@@ -18,19 +18,11 @@ namespace UMAElements
 		private Transform bone_Spine1;
 		private Transform bone_LeftUpLeg;
 		private Transform bone_RightUpLeg;
-
-		private string gender;
 	
 		public Transform[] Points = new Transform[10];
 
 		void Awake()
 		{
-			// find the gender
-			if(transform.FindChild("UMA_Human_Male") != null) 
-				gender = "Male"; 
-			else 
-				gender = "Female";
-
 			// find the bones we need
 			bone_LeftHand = transform.FindChild("Root/Global/Position/Hips/LowerBack/Spine/Spine1/LeftShoulder/LeftArm/LeftForeArm/LeftHand");
 			if(bone_LeftHand == null) 

@@ -63,8 +63,7 @@ namespace UMAElements
 			XColor col3 = GamePalette.DyeSwatch[colors[2]];
 			
 			// the arrays of colours
-			Debug.LogWarning("FIX THIS!");
-			Color[] difpixels = new Color[1];//element.overlayItem.textureList[0].GetPixels();
+			Color[] difpixels = (element.overlayItem.asset.textureList[0] as Texture2D).GetPixels();
 			Color[] splatpixels = element.dyeSplat.GetPixels();
 			Color[] resultpixels = dyedDiffuse.GetPixels();
 			
