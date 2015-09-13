@@ -1,0 +1,225 @@
+﻿using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+
+namespace UMAElements
+{
+	public class AttachmentPoints : MonoBehaviour
+	{
+		private Transform bone_LeftHand;
+		private Transform bone_LeftFinger03_01;
+		private Transform bone_RightHand;
+		private Transform bone_RightFinger03_01;
+		private Transform bone_LeftShoulder;
+		private Transform bone_LeftArm;
+		private Transform bone_RightShoulder;
+		private Transform bone_RightArm;
+		private Transform bone_Spine1;
+		private Transform bone_LeftUpLeg;
+		private Transform bone_RightUpLeg;
+	
+		private Vector3 offsetp_leftpalm_male = new Vector3(0.026127f, -0.054395f, 0.0f);
+		private Vector3 offsetp_leftpalm_female = new Vector3(0.026127f, -0.054395f, 0.0f);
+		private Vector3 offsetp_leftpalm;
+		private Vector3 offsetr_leftpalm = new Vector3(80.0f, 0.0f, 0.0f);
+		
+		private Vector3 offsetp_rightpalm_male = new Vector3(-0.026127f, -0.054395f, 0.0f);
+		private Vector3 offsetp_rightpalm_female = new Vector3(-0.026127f, -0.054395f, 0.0f);
+		private Vector3 offsetp_rightpalm;
+		private Vector3 offsetr_rightpalm = new Vector3(-80.0f, 0.0f, 0.0f);
+	
+		private Vector3 offsetp_leftshoulder_male = new Vector3(-0.046834f, 0.092564f, 0.004589f);
+		private Vector3 offsetp_leftshoulder_female = new Vector3(-0.046834f, 0.072564f, 0.004589f);
+		private Vector3 offsetp_leftshoulder;
+		private Vector3 offsetr_leftshoulder = new Vector3(0.0f, 0.0f, 0.0f);
+	
+		private Vector3 offsetp_rightshoulder_male = new Vector3(0.046834f, 0.092564f, 0.004589f);
+		private Vector3 offsetp_rightshoulder_female = new Vector3(0.046834f, 0.072564f, 0.004589f);
+		private Vector3 offsetp_rightshoulder;
+		private Vector3 offsetr_rightshoulder = new Vector3(0.0f, 0.0f, 0.0f);
+	
+		private Vector3 offsetp_back_male = new Vector3(0.0f, 0.0f, -0.11f);
+		private Vector3 offsetp_back_female = new Vector3(0.0f, 0.0f, -0.11f);
+		private Vector3 offsetp_back;
+		private Vector3 offsetr_back = new Vector3(0.0f, 89.0f, 90.0f);
+	
+		private Vector3 offsetp_leftshoulderblade_male = new Vector3(-0.0f, 0.0f, -0.11f);
+		private Vector3 offsetp_leftshoulderblade_female = new Vector3(-0.0f, 0.0f, -0.11f);
+		private Vector3 offsetp_leftshoulderblade;
+		private Vector3 offsetr_leftshoulderblade = new Vector3(90.0f, 0.0f, 0.0f);
+	
+		private Vector3 offsetp_rightshoulderblade_male = new Vector3(0.0f, 0.0f, -0.11f);
+		private Vector3 offsetp_rightshoulderblade_female = new Vector3(0.0f, 0.0f, -0.11f);
+		private Vector3 offsetp_rightshoulderblade;
+		private Vector3 offsetr_rightshoulderblade = new Vector3(-90.0f, 0.0f, 0.0f);
+	
+		private Vector3 offsetp_leftupleg_male = new Vector3(0.0f, -0.15f, 0.0f);
+		private Vector3 offsetp_leftupleg_female = new Vector3(0.0f, -0.15f, 0.0f);
+		private Vector3 offsetp_leftupleg;
+		private Vector3 offsetr_leftupleg = new Vector3(0.0f, -90.0f, 0.0f);
+	
+		private Vector3 offsetp_rightupleg_male = new Vector3(0.0f, -0.15f, 0.0f);
+		private Vector3 offsetp_rightupleg_female = new Vector3(0.0f, -0.15f, 0.0f);
+		private Vector3 offsetp_rightupleg;
+		private Vector3 offsetr_rightupleg = new Vector3(0.0f, -90.0f, 0.0f);
+		
+		
+		private string gender;
+	
+		public Transform[] Points = new Transform[10];
+		
+	
+	
+	
+
+	
+	
+		void Awake()
+		{
+			// find the gender
+			if(transform.FindChild("UMA_Human_Male") != null) gender = "Male"; else gender = "Female";
+			
+			// find the bones we need
+			bone_LeftHand = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/LowerBack/Spine/Spine1/LeftShoulder/LeftArm/LeftForeArm/LeftHand");
+			if(bone_LeftHand == null) Debug.Log ("could not find left hand bone");
+	
+			bone_LeftFinger03_01 = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/LowerBack/Spine/Spine1/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandFinger03_01");
+			if(bone_LeftFinger03_01 == null) Debug.Log ("could not find left hand finger bone");
+	
+			bone_RightHand = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/LowerBack/Spine/Spine1/RightShoulder/RightArm/RightForeArm/RightHand");
+			if(bone_RightHand == null) Debug.Log ("could not find right hand bone");
+	
+			bone_RightFinger03_01 = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/LowerBack/Spine/Spine1/RightShoulder/RightArm/RightForeArm/RightHand/RightHandFinger03_01");
+			if(bone_RightFinger03_01 == null) Debug.Log ("could not find right hand finger bone");
+			
+			bone_LeftShoulder = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/LowerBack/Spine/Spine1/LeftShoulder");
+			if(bone_LeftShoulder == null) Debug.Log ("could not find left shoudler bone");
+			
+			bone_LeftArm = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/LowerBack/Spine/Spine1/LeftShoulder/LeftArm");
+			if(bone_LeftArm == null) Debug.Log ("could not find left arm bone");
+			
+			bone_RightShoulder = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/LowerBack/Spine/Spine1/RightShoulder");
+			if(bone_RightShoulder == null) Debug.Log ("could not find right shoudler bone");
+			
+			bone_RightArm = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/LowerBack/Spine/Spine1/RightShoulder/RightArm");
+			if(bone_RightArm == null) Debug.Log ("could not find right arm bone");
+			
+			bone_Spine1 = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/LowerBack/Spine/Spine1");
+			if(bone_RightArm == null) Debug.Log ("could not find spine1 bone");
+			
+			bone_LeftUpLeg = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/LeftUpLeg");
+			if(bone_LeftUpLeg == null) Debug.Log ("could not find left upper leg bone");
+			
+			bone_RightUpLeg = gameObject.transform.FindChild("UMA_"+gender+"_Rig/Global/Position/Hips/RightUpLeg");
+			if(bone_RightUpLeg == null) Debug.Log ("could not find right upper leg bone");
+			
+			// build the attachment point game objects
+			for(int i = 1; i < Points.Length; i++)
+			{
+				GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+				UnityEngine.Object.Destroy(go.GetComponent<SphereCollider>());
+				UnityEngine.Object.Destroy(go.GetComponent<MeshRenderer>());
+				go.transform.localScale = Vector3.one;
+				go.transform.localPosition = Vector3.zero;
+				go.name = "AttachmentPoint";
+				Points[i] = go.transform;
+			}
+			
+			// attach the spheres
+			Points[(int)Positions.AttachmentSlots.LeftPalm].parent = bone_LeftHand;
+			Points[(int)Positions.AttachmentSlots.RightPalm].parent = bone_RightHand;
+			Points[(int)Positions.AttachmentSlots.LeftShoulder].parent = bone_LeftShoulder;
+			Points[(int)Positions.AttachmentSlots.RightShoulder].parent = bone_RightShoulder;
+			Points[(int)Positions.AttachmentSlots.LeftHip].parent = bone_LeftUpLeg;
+			Points[(int)Positions.AttachmentSlots.RightHip].parent = bone_RightUpLeg;
+			Points[(int)Positions.AttachmentSlots.Back].parent = bone_Spine1;
+			Points[(int)Positions.AttachmentSlots.LeftShoulderBlade].parent = bone_LeftShoulder;
+			Points[(int)Positions.AttachmentSlots.RightShoulderBlade].parent = bone_RightShoulder;
+			
+			// set the basic rotation for each attachment point
+			Points[(int)Positions.AttachmentSlots.LeftPalm].localRotation = Quaternion.Euler(offsetr_leftpalm);
+			Points[(int)Positions.AttachmentSlots.RightPalm].localRotation = Quaternion.Euler(offsetr_rightpalm);
+			Points[(int)Positions.AttachmentSlots.LeftShoulder].localRotation = Quaternion.Euler(offsetr_leftshoulder);
+			Points[(int)Positions.AttachmentSlots.RightShoulder].localRotation = Quaternion.Euler(offsetr_rightshoulder);
+			Points[(int)Positions.AttachmentSlots.LeftHip].localRotation = Quaternion.Euler(offsetr_leftupleg);
+			Points[(int)Positions.AttachmentSlots.RightHip].localRotation = Quaternion.Euler(offsetr_rightupleg);
+			Points[(int)Positions.AttachmentSlots.Back].localRotation = Quaternion.Euler(offsetr_back);
+			Points[(int)Positions.AttachmentSlots.LeftShoulderBlade].localRotation = Quaternion.Euler(offsetr_leftshoulderblade);
+			Points[(int)Positions.AttachmentSlots.RightShoulderBlade].localRotation = Quaternion.Euler(offsetr_rightshoulderblade);
+			
+			// set the offsets based upon gender
+			if(gender == "Male")
+			{
+				offsetp_leftpalm = offsetp_leftpalm_male;
+				offsetp_rightpalm = offsetp_rightpalm_male;
+				offsetp_leftshoulder = offsetp_leftshoulder_male;
+				offsetp_rightshoulder = offsetp_rightshoulder_male;
+				offsetp_leftupleg = offsetp_leftupleg_male;
+				offsetp_rightupleg = offsetp_rightupleg_male;
+				offsetp_back = offsetp_back_male;
+				offsetp_leftshoulderblade = offsetp_leftshoulderblade_male;
+				offsetp_rightshoulderblade = offsetp_rightshoulderblade_male;
+			} else {
+				offsetp_leftpalm = offsetp_leftpalm_female;
+				offsetp_rightpalm = offsetp_rightpalm_female;
+				offsetp_leftshoulder = offsetp_leftshoulder_female;
+				offsetp_rightshoulder = offsetp_rightshoulder_female;
+				offsetp_leftupleg = offsetp_leftupleg_female;
+				offsetp_rightupleg = offsetp_rightupleg_female;
+				offsetp_back = offsetp_back_female;
+				offsetp_leftshoulderblade = offsetp_leftshoulderblade_female;
+				offsetp_rightshoulderblade = offsetp_rightshoulderblade_female;
+			}
+		}
+	
+	
+
+	
+	
+	
+		void LateUpdate()
+		{
+			Vector3 average;
+			
+			// left palm
+			average = (bone_LeftFinger03_01.position + bone_LeftHand.position) / 2.0f;
+			Points[(int)Positions.AttachmentSlots.LeftPalm].position = average + offsetp_leftpalm;
+	
+			// right palm
+			average = (bone_RightFinger03_01.position + bone_RightHand.position) / 2.0f;
+			Points[(int)Positions.AttachmentSlots.RightPalm].position = average + offsetp_rightpalm;
+	
+			// left shoudler
+			average = (bone_LeftArm.position + bone_LeftShoulder.position) / 2.0f;
+			Points[(int)Positions.AttachmentSlots.LeftShoulder].position = average + offsetp_leftshoulder;
+	
+			// right shoudler
+			average = (bone_RightArm.position + bone_RightShoulder.position) / 2.0f;
+			Points[(int)Positions.AttachmentSlots.RightShoulder].position = average + offsetp_rightshoulder;
+	
+			// left hip
+			average = bone_LeftUpLeg.position;
+			Points[(int)Positions.AttachmentSlots.LeftHip].localPosition = offsetp_leftupleg;
+	
+			// right hip
+			average = bone_RightUpLeg.position;
+			Points[(int)Positions.AttachmentSlots.RightHip].localPosition = offsetp_rightupleg;
+	
+			// back
+			average = (bone_Spine1.position + bone_LeftShoulder.position + bone_RightShoulder.position) / 3.0f;
+			Points[(int)Positions.AttachmentSlots.Back].position = average + offsetp_back;
+	
+			// left shoudlerblade
+			average = (bone_LeftArm.position + bone_LeftShoulder.position) / 2.0f;
+			Points[(int)Positions.AttachmentSlots.LeftShoulderBlade].position = average + offsetp_leftshoulderblade;
+	
+			// right shoudlerblade
+			average = (bone_RightArm.position + bone_RightShoulder.position) / 2.0f;
+			Points[(int)Positions.AttachmentSlots.RightShoulderBlade].position = average + offsetp_rightshoulderblade;
+		}
+			
+		
+	}
+}
