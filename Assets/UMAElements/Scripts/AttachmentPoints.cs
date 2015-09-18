@@ -71,12 +71,8 @@ namespace UMAElements
 			// build the attachment point game objects
 			for(int i = 1; i < Points.Length; i++)
 			{
-				GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-				UnityEngine.Object.Destroy(go.GetComponent<SphereCollider>());
-				UnityEngine.Object.Destroy(go.GetComponent<MeshRenderer>());
+				GameObject go = new GameObject("AttachmentPoint");
 				go.transform.localScale = Vector3.one;
-				go.transform.localPosition = Vector3.zero;
-				go.name = "AttachmentPoint";
 				Points[i] = go.transform;
 			}
 

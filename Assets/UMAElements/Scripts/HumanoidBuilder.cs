@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using UMA;
 
 namespace UMAElements
 {
-	public class HumanoidBuilder
+    public class Humanoid
+    {
+        public string name;
+        public HumanoidStructure human;
+    }
+
+    public class HumanoidBuilder
 	{
 		// our objects
 	    private static RaceLibrary _raceLibrary;
@@ -15,7 +20,7 @@ namespace UMAElements
 		// has the builder been initialized or not
 		private static bool	_initialized = false;
 
-		private static HumanoidStructure _human;
+        private static List<Humanoid> _charList;
 
 		/// <summary>
 		/// Initialize the HumanoidBuilder. This must be called first before trying to use the builder to create UMAs.
@@ -43,6 +48,7 @@ namespace UMAElements
 			_atlasScale = scale;
 			// we've been initialized
 			_initialized = true;
+            _charList = new List<Humanoid>();
 		}
 
 		/// <summary>
@@ -81,8 +87,6 @@ namespace UMAElements
 				Debug.LogError("UMAElements.HumanoidBuilder.Create: Attempted use before initialization. Must call HumanoidBuilder.Initialize(scale) first."); 
 				return null; 
 			}
-
-			_human = human;
 			
 			// create a new UMARecipe
 			GameObject thisUMA = new GameObject(name);
@@ -149,17 +153,33 @@ namespace UMAElements
 
 			dynamicAvatar.UpdateNewRace();
 
+            Humanoid tmp = new Humanoid();
+            tmp.name = name;
+            tmp.human = human;
+            _charList.Add(tmp);
+
 			// finally return this UMA's game object
 			return thisUMA;
 		}
 
+        public static HumanoidStructure GetHumanoid(string name)
+        {
+            for(int i = 0; i < _charList.Capacity; i++)
+            {
+                if(_charList[i].name == name)
+                {
+                    return _charList[i].human;
+                }
+            }
+            return null;
+        }
+
 		private static void UMAFinished(UMAData thisUMAData)
 		{
-			AttachmentPoints points = thisUMAData.gameObject.AddComponent<AttachmentPoints>();
-			BuildUMAAttachments(thisUMAData, _human, points);
+            HumanoidStructure human = GetHumanoid(thisUMAData.gameObject.name);
 
-			//To make sure its not used outside of this use
-			_human = null;
+            AttachmentPoints points = thisUMAData.gameObject.AddComponent<AttachmentPoints>();
+			BuildUMAAttachments(thisUMAData, human, points);
 		}
 
 		/// <summary>
@@ -425,7 +445,7 @@ namespace UMAElements
 		private static OverlayData InstantiateOverlay(OverlayData od, Color col)
 		{
 			OverlayData newod = od.Duplicate();
-			newod.color = col;
+			newod.colorData.color = col;
 			return newod;
 		}
 	}
