@@ -52,16 +52,16 @@ public class Example : MonoBehaviour
 		// you can add tails, horns, eyelashes, etc after these basics
 		// but the build order is vital to keep attachment vertex indecies
 		HumanoidStructure.BodyAdd(humanf, "Human Female Eyes 01");
-		HumanoidStructure.BodyAdd(humanf, "Human Female Head 01", 4);
-		HumanoidStructure.BodyAdd(humanf, "Human Female HeadEars 01", 4);
-		HumanoidStructure.BodyAdd(humanf, "Human Female HeadEyes 01", 4);
-		HumanoidStructure.BodyAdd(humanf, "Human Female HeadMouth 01", 4);
-		HumanoidStructure.BodyAdd(humanf, "Human Female HeadNose 01", 4);
+		HumanoidStructure.BodyAdd(humanf, "Human Female Head 01", new Color32(188, 188, 188, 255));
+		HumanoidStructure.BodyAdd(humanf, "Human Female HeadEars 01", new Color32(188, 188, 188, 255));
+		HumanoidStructure.BodyAdd(humanf, "Human Female HeadEyes 01", new Color32(188, 188, 188, 255));
+		HumanoidStructure.BodyAdd(humanf, "Human Female HeadMouth 01", new Color32(188, 188, 188, 255));
+		HumanoidStructure.BodyAdd(humanf, "Human Female HeadNose 01", new Color32(188, 188, 188, 255));
 		HumanoidStructure.BodyAdd(humanf, "Human Female Head InnerMouth");
-		HumanoidStructure.BodyAdd(humanf, "Human Female Torso 01", 4);
-		HumanoidStructure.BodyAdd(humanf, "Human Female Hands 01", 4);
-		HumanoidStructure.BodyAdd(humanf, "Human Female Legs 01", 4);
-		HumanoidStructure.BodyAdd(humanf, "Human Female Feet 01", 4);
+		HumanoidStructure.BodyAdd(humanf, "Human Female Torso 01", new Color32(188, 188, 188, 255));
+		HumanoidStructure.BodyAdd(humanf, "Human Female Hands 01", new Color32(188, 188, 188, 255));
+		HumanoidStructure.BodyAdd(humanf, "Human Female Legs 01", new Color32(188, 188, 188, 255));
+		HumanoidStructure.BodyAdd(humanf, "Human Female Feet 01", new Color32(188, 188, 188, 255));
 		
 		// let's add some clothing
 		HumanoidStructure.WardrobeAdd(humanf, "MaleShirt 01", 2);

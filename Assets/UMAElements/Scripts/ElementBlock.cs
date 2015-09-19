@@ -12,12 +12,19 @@ namespace UMAElements
 		public List<int> colors;
 		public Texture2D dyedDiffuse;
 		public bool attachmentIsActive;
+		public Color32 color;
 
-		
 		public ElementBlock(ElementData e)
 		{
 			this.element = e;
 			this.colors = new List<int>();
+			this.attachmentIsActive = false;
+		}
+
+		public ElementBlock(ElementData e, Color32 color)
+		{
+			this.element = e;
+			this.color = color;
 			this.attachmentIsActive = false;
 		}
 		

@@ -227,6 +227,37 @@ namespace UMAElements
 		/// the element-name of the element to add.
 		/// </param>
 		/// <param name='color'>
+		/// the color to use.
+		/// </param>
+		public static bool BodyAdd(HumanoidStructure human, string name, Color32 color)
+		{
+			// does this named element exist in our dictionaries
+			foreach(ElementData ed in ElementsLibrary.Elements.Values)
+			{
+				if(ed.Name == name)
+				{
+					// build a new element block and add it to the body
+					ElementBlock eb = new ElementBlock(ed, color);
+					human.Body.Add(eb);
+					return true;
+				}
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// Adds a body element to the humanoid-structure build, given it's element-name, and a single multiplier color.
+		/// </summary>
+		/// <returns>
+		/// Returns a bool, true if anything was added, false if the body build list was unchanged
+		/// </returns>
+		/// <param name='human'>
+		/// HumanoidStructure
+		/// </param>
+		/// <param name='name'>
+		/// the element-name of the element to add.
+		/// </param>
+		/// <param name='color'>
 		/// the index of the muliplier color to use, see DyeSwatch in the <see cref="UMAElements.GamePalette"/> class.
 		/// </param>
 		public static bool BodyAdd(HumanoidStructure human, string name, int color)
@@ -301,6 +332,32 @@ namespace UMAElements
 			
 			// build a new element block and add it to the body
 			ElementBlock eb = new ElementBlock(ElementsLibrary.Elements[index]);
+			human.Body.Add(eb);
+			return true;
+		}
+
+		/// <summary>
+		/// Adds a body element to the humanoid-structure build, given it's element-index, and a single multiplier color.
+		/// </summary>
+		/// <returns>
+		/// Returns a bool, true if anything was added, false if the body build list was unchanged
+		/// </returns>
+		/// <param name='human'>
+		/// HumanoidStructure
+		/// </param>
+		/// <param name='index'>
+		/// the element-index of the element to add.
+		/// </param>
+		/// <param name='color'>
+		/// the color to add.
+		/// </param>
+		public static bool BodyAdd(HumanoidStructure human, int index, Color32 color)
+		{
+			// does this index exist?
+			if(!ElementsLibrary.Elements.ContainsKey(index)) return false;
+			
+			// build a new element block and add it to the body
+			ElementBlock eb = new ElementBlock(ElementsLibrary.Elements[index], color);
 			human.Body.Add(eb);
 			return true;
 		}
@@ -497,6 +554,38 @@ namespace UMAElements
 		/// the element-name of the element to add.
 		/// </param>
 		/// <param name='color'>
+		/// the color to add.
+		/// </param>
+		public static bool WardrobeAdd(HumanoidStructure human, string name, Color32 color)
+		{
+			// does this named element exist in our dictionaries
+			foreach(ElementData ed in ElementsLibrary.Elements.Values)
+			{
+				if(ed.Name == name)
+				{
+					// build a new element block and add it to the body
+					ElementBlock eb = new ElementBlock(ed, color);
+					human.Wardrobe.Add(eb);
+					return true;
+				}
+			}
+			return false;
+		}
+
+
+		/// <summary>
+		/// Adds a wardrobe element to the humanoid-structure build, given it's element-name, and a single multiplier color.
+		/// </summary>
+		/// <returns>
+		/// Returns a bool, true if anything was added, false if the body build list was unchanged
+		/// </returns>
+		/// <param name='human'>
+		/// HumanoidStructure
+		/// </param>
+		/// <param name='name'>
+		/// the element-name of the element to add.
+		/// </param>
+		/// <param name='color'>
 		/// the index of the muliplier color to use, see DyeSwatch in the <see cref="UMAElements.GamePalette"/> class.
 		/// </param>
 		public static bool WardrobeAdd(HumanoidStructure human, string name, int color)
@@ -574,7 +663,33 @@ namespace UMAElements
 			human.Wardrobe.Add(eb);
 			return true;
 		}
-		
+
+		/// <summary>
+		/// Adds a wardrobe element to the humanoid-structure build, given it's element-index, and a single multiplier color.
+		/// </summary>
+		/// <returns>
+		/// Returns a bool, true if anything was added, false if the body build list was unchanged
+		/// </returns>
+		/// <param name='human'>
+		/// HumanoidStructure
+		/// </param>
+		/// <param name='index'>
+		/// the element-index of the element to add.
+		/// </param>
+		/// <param name='color'>
+		/// the color to add.
+		/// </param>
+		public static bool WardrobeAdd(HumanoidStructure human, int index, Color32 color)
+		{
+			// does this index exist?
+			if(!ElementsLibrary.Elements.ContainsKey(index)) return false;
+			
+			// build a new element block and add it to the body
+			ElementBlock eb = new ElementBlock(ElementsLibrary.Elements[index], color);
+			human.Wardrobe.Add(eb);
+			return true;
+		}
+
 		/// <summary>
 		/// Adds a wardrobe element to the humanoid-structure build, given it's element-index, and a single multiplier color.
 		/// </summary>
@@ -1160,9 +1275,17 @@ namespace UMAElements
 			for(int n = 0; n < bodyparts.Length; n++)
 			{
 				string[] bodypartsparams = bodyparts[n].Split(',');
-				if(bodypartsparams.Length == 1) BodyAdd(hs, String2Int(bodypartsparams[0]));
-				if(bodypartsparams.Length == 2) BodyAdd(hs, String2Int(bodypartsparams[0]), String2Int(bodypartsparams[1]));
-				if(bodypartsparams.Length == 4) BodyAdd(hs, String2Int(bodypartsparams[0]), String2Int(bodypartsparams[1]), String2Int(bodypartsparams[2]), String2Int(bodypartsparams[3]));
+				if(bodypartsparams.Length == 1)
+					BodyAdd(hs, String2Int(bodypartsparams[0]));
+				else if(bodypartsparams.Length == 2)
+					BodyAdd(hs, String2Int(bodypartsparams[0]), String2Int(bodypartsparams[1]));
+				else if(bodypartsparams.Length == 4)
+					BodyAdd(hs, String2Int(bodypartsparams[0]), String2Int(bodypartsparams[1]), String2Int(bodypartsparams[2]), String2Int(bodypartsparams[3]));
+				else if(bodypartsparams.Length == 5)
+				{
+					Color32 color = new Color32(byte.Parse(bodypartsparams[1]), byte.Parse(bodypartsparams[2]), byte.Parse(bodypartsparams[3]), byte.Parse(bodypartsparams[4]));
+					BodyAdd(hs, String2Int(bodypartsparams[0]), color);
+				}
 			}
 			
 			// the wardrobe slots info
@@ -1171,9 +1294,17 @@ namespace UMAElements
 			for(int n = 0; n < wardrobeparts.Length; n++)
 			{
 				string[] wardrobepartsparams = wardrobeparts[n].Split(',');
-				if(wardrobepartsparams.Length == 1) WardrobeAdd(hs, String2Int(wardrobepartsparams[0]));
-				if(wardrobepartsparams.Length == 2) WardrobeAdd(hs, String2Int(wardrobepartsparams[0]), String2Int(wardrobepartsparams[1]));
-				if(wardrobepartsparams.Length == 4) WardrobeAdd(hs, String2Int(wardrobepartsparams[0]), String2Int(wardrobepartsparams[1]), String2Int(wardrobepartsparams[2]), String2Int(wardrobepartsparams[3]));
+				if(wardrobepartsparams.Length == 1)
+					WardrobeAdd(hs, String2Int(wardrobepartsparams[0]));
+				else if(wardrobepartsparams.Length == 2)
+					WardrobeAdd(hs, String2Int(wardrobepartsparams[0]), String2Int(wardrobepartsparams[1]));
+				else if(wardrobepartsparams.Length == 4)
+					WardrobeAdd(hs, String2Int(wardrobepartsparams[0]), String2Int(wardrobepartsparams[1]), String2Int(wardrobepartsparams[2]), String2Int(wardrobepartsparams[3]));
+				else if(wardrobepartsparams.Length == 5)
+				{
+					Color32 color = new Color32(byte.Parse(wardrobepartsparams[1]), byte.Parse(wardrobepartsparams[2]), byte.Parse(wardrobepartsparams[3]), byte.Parse(wardrobepartsparams[4]));
+					WardrobeAdd(hs, String2Int(wardrobepartsparams[0]), color);
+				}
 			}
 			
 			// the attachments slots info
@@ -1182,7 +1313,8 @@ namespace UMAElements
 			for(int n = 0; n < attachmentsparts.Length; n++)
 			{
 				string[] attachmentspartsparams = attachmentsparts[n].Split(',');
-				if(attachmentspartsparams.Length == 1) AttachmentsAdd(hs, String2Int(attachmentspartsparams[0]));
+				if(attachmentspartsparams.Length == 1)
+					AttachmentsAdd(hs, String2Int(attachmentspartsparams[0]));
 				//if(attachmentspartsparams.Length == 2) AttachmentsAdd(hs, String2Int(attachmentspartsparams[0]), String2Int(attachmentspartsparams[1]));
 				//if(attachmentspartsparams.Length == 4) AttachmentsAdd(hs, String2Int(attachmentspartsparams[0]), String2Int(attachmentspartsparams[1]), String2Int(attachmentspartsparams[2]), String2Int(bodypartsparams[3]));
 			}
@@ -1261,10 +1393,17 @@ namespace UMAElements
 				if(n != 0) 
 					bodyparts += "^";
 				bodyparts += human.Body[n].element.Index;
-				if(human.Body[n].colors.Count == 1) 
-					bodyparts += "," + human.Body[n].colors[0];
-				if(human.Body[n].colors.Count == 3) 
-					bodyparts += "," + human.Body[n].colors[0] + "," + human.Body[n].colors[1] + "," + human.Body[n].colors[2];
+				if(human.Body[n].colors != null)
+				{
+					if(human.Body[n].colors.Count == 1) 
+						bodyparts += "," + human.Body[n].colors[0];
+					else if(human.Body[n].colors.Count == 3) 
+						bodyparts += "," + human.Body[n].colors[0] + "," + human.Body[n].colors[1] + "," + human.Body[n].colors[2];
+				}
+				else
+				{
+					bodyparts += "," + human.Body[n].color.r + "," + human.Body[n].color.g + "," + human.Body[n].color.b + "," + human.Body[n].color.a;
+				}
 			}
 			o += bodyparts + "|";
 			
@@ -1274,10 +1413,17 @@ namespace UMAElements
 			{
 				if(n != 0) wardrobeparts += "^";
 				wardrobeparts += human.Wardrobe[n].element.Index;
-				if(human.Wardrobe[n].colors.Count == 1) 
-					wardrobeparts += "," + human.Wardrobe[n].colors[0];
-				if(human.Wardrobe[n].colors.Count == 3) 
-					wardrobeparts += "," + human.Wardrobe[n].colors[0] + "," + human.Wardrobe[n].colors[1] + "," + human.Wardrobe[n].colors[2];
+				if(human.Body[n].colors != null)
+				{
+					if(human.Wardrobe[n].colors.Count == 1) 
+						wardrobeparts += "," + human.Wardrobe[n].colors[0];
+					if(human.Wardrobe[n].colors.Count == 3) 
+						wardrobeparts += "," + human.Wardrobe[n].colors[0] + "," + human.Wardrobe[n].colors[1] + "," + human.Wardrobe[n].colors[2];
+				}
+				else
+				{
+					wardrobeparts += "," + human.Wardrobe[n].color.r + "," + human.Wardrobe[n].color.g + "," + human.Wardrobe[n].color.b + "," + human.Wardrobe[n].color.a;
+				}
 			}
 			o += wardrobeparts + "|";
 			

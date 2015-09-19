@@ -345,13 +345,18 @@ namespace UMAElements
 				// add the body overlay to this position
 				if(human.Body[i].element.overlayItem)
 				{
-					if(human.Body[i].colors.Count == 0)
-						thisUMAData.umaRecipe.slotDataList[ (int)human.Body[i].element.buildPos ].AddOverlay( InstantiateOverlay(human.Body[i].element.overlayItem, Color.white) );
-					if(human.Body[i].colors.Count == 1)
-						thisUMAData.umaRecipe.slotDataList[ (int)human.Body[i].element.buildPos ].AddOverlay( InstantiateOverlay(human.Body[i].element.overlayItem, GamePalette.BodySwatch[human.Body[i].colors[0]].color) );
-					if(human.Body[i].colors.Count == 3)
+					Debug.Log(human.Body[i].element.Name);
+					Debug.Log(human.Body[i].color);
+					Debug.Log(human.Body[i].colors);
+					if(human.Body[i].colors == null)
+						thisUMAData.umaRecipe.slotDataList[ (int)human.Body[i].element.buildPos ].AddOverlay(InstantiateOverlay(human.Body[i].element.overlayItem, human.Body[i].color));
+					else if(human.Body[i].colors.Count == 0)
+						thisUMAData.umaRecipe.slotDataList[ (int)human.Body[i].element.buildPos ].AddOverlay(InstantiateOverlay(human.Body[i].element.overlayItem, Color.white));
+					else if(human.Body[i].colors.Count == 1)
+						thisUMAData.umaRecipe.slotDataList[ (int)human.Body[i].element.buildPos ].AddOverlay(InstantiateOverlay(human.Body[i].element.overlayItem, GamePalette.BodySwatch[human.Body[i].colors[0]].color));
+					else if(human.Body[i].colors.Count == 3)
 					{
-						thisUMAData.umaRecipe.slotDataList[ (int)human.Body[i].element.buildPos ].AddOverlay( InstantiateOverlay(human.Body[i].element.overlayItem, Color.white) );
+						thisUMAData.umaRecipe.slotDataList[ (int)human.Body[i].element.buildPos ].AddOverlay(InstantiateOverlay(human.Body[i].element.overlayItem, Color.white));
 						thisUMAData.umaRecipe.slotDataList[ (int)human.Body[i].element.buildPos ].GetOverlay(human.Body[i].element.overlayItem.asset.overlayName).asset.textureList[0] = human.Body[i].dyedDiffuse;
 					}
 				}
@@ -373,11 +378,13 @@ namespace UMAElements
 				// add the body overlay to this position
 				if(human.Wardrobe[i].element.overlayItem)
 				{
-					if(human.Wardrobe[i].colors.Count == 0)
+					if(human.Wardrobe[i].colors == null)
+						thisUMAData.umaRecipe.slotDataList[ (int)human.Wardrobe[i].element.buildPos ].AddOverlay( InstantiateOverlay(human.Wardrobe[i].element.overlayItem, human.Body[i].color));
+					else if(human.Wardrobe[i].colors.Count == 0)
 						thisUMAData.umaRecipe.slotDataList[ (int)human.Wardrobe[i].element.buildPos ].AddOverlay( InstantiateOverlay(human.Wardrobe[i].element.overlayItem, Color.white) );
-					if(human.Wardrobe[i].colors.Count == 1)
+					else if(human.Wardrobe[i].colors.Count == 1)
 						thisUMAData.umaRecipe.slotDataList[ (int)human.Wardrobe[i].element.buildPos ].AddOverlay( InstantiateOverlay(human.Wardrobe[i].element.overlayItem, GamePalette.DyeSwatch[human.Wardrobe[i].colors[0]].color) );
-					if(human.Wardrobe[i].colors.Count == 3)
+					else if(human.Wardrobe[i].colors.Count == 3)
 					{
 						thisUMAData.umaRecipe.slotDataList[ (int)human.Wardrobe[i].element.buildPos ].AddOverlay( InstantiateOverlay(human.Wardrobe[i].element.overlayItem, Color.white) );
 						thisUMAData.umaRecipe.slotDataList[ (int)human.Wardrobe[i].element.buildPos ].GetOverlay(human.Wardrobe[i].element.overlayItem.asset.overlayName).asset.textureList[0] = human.Wardrobe[i].dyedDiffuse;
