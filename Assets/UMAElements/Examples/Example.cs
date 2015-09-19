@@ -17,7 +17,8 @@ public class Example : MonoBehaviour
 		// now let's generate a humanoid male
 		human = new HumanoidStructure('M');
 	
-		// set the basic body slots
+		// set the basic body slots.
+		// Use color indexes from the GamePalette.cs
 		HumanoidStructure.BodyAdd(human, "Human Male Eyes 01");
 		HumanoidStructure.BodyAdd(human, "Human Male Head 01", 4);
 		HumanoidStructure.BodyAdd(human, "Human Male HeadEars 01", 4);
@@ -51,6 +52,7 @@ public class Example : MonoBehaviour
 	
 		// you can add tails, horns, eyelashes, etc after these basics
 		// but the build order is vital to keep attachment vertex indecies
+		// This time we use Color32 to set the color instead.
 		HumanoidStructure.BodyAdd(humanf, "Human Female Eyes 01");
 		HumanoidStructure.BodyAdd(humanf, "Human Female Head 01", new Color32(188, 188, 188, 255));
 		HumanoidStructure.BodyAdd(humanf, "Human Female HeadEars 01", new Color32(188, 188, 188, 255));

@@ -345,9 +345,6 @@ namespace UMAElements
 				// add the body overlay to this position
 				if(human.Body[i].element.overlayItem)
 				{
-					Debug.Log(human.Body[i].element.Name);
-					Debug.Log(human.Body[i].color);
-					Debug.Log(human.Body[i].colors);
 					if(human.Body[i].colors == null)
 						thisUMAData.umaRecipe.slotDataList[ (int)human.Body[i].element.buildPos ].AddOverlay(InstantiateOverlay(human.Body[i].element.overlayItem, human.Body[i].color));
 					else if(human.Body[i].colors.Count == 0)

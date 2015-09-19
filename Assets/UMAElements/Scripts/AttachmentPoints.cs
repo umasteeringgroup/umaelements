@@ -95,7 +95,7 @@ namespace UMAElements
 			Points[(int)Positions.AttachmentSlots.LeftHip].localPosition = Vector3.zero;
 			Points[(int)Positions.AttachmentSlots.RightHip].localPosition = Vector3.zero;
 			Points[(int)Positions.AttachmentSlots.Back].localPosition = Vector3.zero;
-			Points[(int)Positions.AttachmentSlots.LeftShoulderBlade].localPosition = Vector3.zero;
+			Points[(int)Positions.AttachmentSlots.LeftShoulderBlade].localPosition = new Vector3(0, 0, -0.15f);
 			Points[(int)Positions.AttachmentSlots.RightShoulderBlade].localPosition = Vector3.zero;
 
 			// set the basic rotation for each attachment point
@@ -106,7 +106,7 @@ namespace UMAElements
 			Points[(int)Positions.AttachmentSlots.LeftHip].localRotation = Quaternion.identity;
 			Points[(int)Positions.AttachmentSlots.RightHip].localRotation = Quaternion.identity;
 			Points[(int)Positions.AttachmentSlots.Back].localRotation = Quaternion.identity;
-			Points[(int)Positions.AttachmentSlots.LeftShoulderBlade].localRotation = Quaternion.identity;
+			Points[(int)Positions.AttachmentSlots.LeftShoulderBlade].localRotation = Quaternion.Euler(160, 0, 0);
 			Points[(int)Positions.AttachmentSlots.RightShoulderBlade].localRotation = Quaternion.identity;
 		}
 	}
