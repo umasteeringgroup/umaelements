@@ -572,7 +572,6 @@ namespace UMAElements
 			return false;
 		}
 
-
 		/// <summary>
 		/// Adds a wardrobe element to the humanoid-structure build, given it's element-name, and a single multiplier color.
 		/// </summary>
@@ -1413,7 +1412,7 @@ namespace UMAElements
 			{
 				if(n != 0) wardrobeparts += "^";
 				wardrobeparts += human.Wardrobe[n].element.Index;
-				if(human.Body[n].colors != null)
+				if(human.Wardrobe[n].colors != null)
 				{
 					if(human.Wardrobe[n].colors.Count == 1) 
 						wardrobeparts += "," + human.Wardrobe[n].colors[0];
